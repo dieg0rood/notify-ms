@@ -12,8 +12,21 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-class IndexController extends AbstractController
+
+use Hyperf\Di\Annotation\Inject;
+use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\HttpServer\Contract\ResponseInterface;
+
+/**
+ * @codeCoverageIgnore
+ */
+class IndexController
 {
+    #[Inject]
+    protected RequestInterface $request;
+    #[Inject]
+    protected ResponseInterface $response;
+
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
