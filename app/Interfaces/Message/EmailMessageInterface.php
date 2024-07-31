@@ -1,36 +1,28 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+
 namespace App\Interfaces\Message;
 
 interface EmailMessageInterface
 {
-    /**
-     * @return array
-     */
     public function getTo(): array;
 
-    /**
-     * @return array
-     */
     public function getAttachments(): array;
 
-    /**
-     * @return string
-     */
     public function getSubject(): string;
 
-    /**
-     * @return string
-     */
     public function getBody(): string;
 
-    /**
-     * @return array|null
-     */
     public function getBcc(): ?array;
 
-    /**
-     * @return array|null
-     */
     public function getCc(): ?array;
 }

@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
@@ -24,6 +23,7 @@ class IndexController
 {
     #[Inject]
     protected RequestInterface $request;
+
     #[Inject]
     protected ResponseInterface $response;
 

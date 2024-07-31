@@ -1,11 +1,23 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+
 namespace App\Service;
 
 use App\Interfaces\Connector\EmailConnectorInterface;
 use App\Interfaces\Message\EmailMessageInterface;
 use App\Interfaces\Service\EmailSenderInterface;
+use Exception;
 use Hyperf\Contract\StdoutLoggerInterface;
+
 use function Hyperf\Support\make;
 
 class EmailSenderService implements EmailSenderInterface
@@ -34,10 +46,10 @@ class EmailSenderService implements EmailSenderInterface
                 $this->message->getBcc(),
                 $this->message->getAttachments()
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             make(StdoutLoggerInterface::class)
                 ->alert(
-                    "Error: Notification_not_send" .
+                    'Error: Notification_not_send' .
                     "\n Message: " . $e->getMessage() .
                     "\n File: " . $e->getFile() .
                     "\n Line: " . $e->getLine() . "
@@ -49,5 +61,4 @@ class EmailSenderService implements EmailSenderInterface
 
         return true;
     }
-
 }

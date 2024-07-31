@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+
 namespace App\Service;
 
 use App\Interfaces\Connector\SmsConnectorInterface;
@@ -7,6 +17,7 @@ use App\Interfaces\Message\SmsMessageInterface;
 use App\Interfaces\Service\SmsSenderInterface;
 use Exception;
 use Hyperf\Contract\StdoutLoggerInterface;
+
 use function Hyperf\Support\make;
 
 class SmsSenderService implements SmsSenderInterface
@@ -23,6 +34,7 @@ class SmsSenderService implements SmsSenderInterface
 
         return $this;
     }
+
     public function send(): bool
     {
         try {
@@ -36,12 +48,12 @@ class SmsSenderService implements SmsSenderInterface
                     "\nMessage: " . $e->getMessage() .
                     "\n File: " . $e->getFile() .
                     "\n Line: " . $e->getLine() . "
-                    \n TraceAsString: " . $e->getTraceAsString());
+                    \n TraceAsString: " . $e->getTraceAsString()
+                );
 
             return false;
         }
 
         return true;
     }
-
 }

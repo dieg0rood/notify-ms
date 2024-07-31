@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+
 namespace App\DTO;
 
 use App\Interfaces\Message\PushMessageInterface;
@@ -7,7 +17,9 @@ use App\Interfaces\Message\PushMessageInterface;
 class PushMessage implements PushMessageInterface
 {
     private string $body;
+
     private ?string $payload;
+
     private string $subject;
 
     public function __construct(array $data)
@@ -17,29 +29,18 @@ class PushMessage implements PushMessageInterface
         $this->payload = $data['mobile']['push']['payload'];
     }
 
-    /**
-     * @return string
-     */
     public function getBody(): string
     {
         return $this->body;
     }
 
-    /**
-     * @return string
-     */
     public function getSubject(): string
     {
         return $this->subject;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPayload(): ?string
     {
         return $this->payload;
     }
-
-
 }

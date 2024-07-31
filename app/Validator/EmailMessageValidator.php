@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+
 namespace App\Validator;
 
 use App\Interfaces\Validator\ValidatorInterface;
@@ -19,7 +29,7 @@ class EmailMessageValidator extends AbstractValidator implements ValidatorInterf
             'email.body' => ['string', 'required'],
             'email.attachments' => ['array'],
             'email.attachments.*.realName' => ['required', 'string'],
-            'email.attachments.*.path' => ['required','string'],
+            'email.attachments.*.path' => ['required', 'string'],
         ];
     }
 

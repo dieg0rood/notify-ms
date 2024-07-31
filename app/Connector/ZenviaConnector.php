@@ -1,30 +1,32 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ */
+
 namespace App\Connector;
 
-
 use App\Interfaces\Connector\SmsConnectorInterface;
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Hyperf\Contract\StdoutLoggerInterface;
+
 use function Hyperf\Config\config;
 use function Hyperf\Support\make;
 
 class ZenviaConnector implements SmsConnectorInterface
 {
-    /**
-     * @var string
-     */
     protected string $to;
 
-    /**
-     * @var string
-     */
     protected string $from;
 
-    /**
-     * @var string
-     */
     protected string $text;
 
     public function getConnectorName(): string
@@ -32,12 +34,7 @@ class ZenviaConnector implements SmsConnectorInterface
         return 'zenvia';
     }
 
-    /**
-     * @param string|int $to
-     * @param string $text
-     * @return void
-     */
-    public function sendNotification(string|int $to, string $text): bool
+    public function sendNotification(int|string $to, string $text): bool
     {
         $this->to = $to;
         $this->from = config('drivers.sms.zenvia.sender_id');
@@ -56,9 +53,9 @@ class ZenviaConnector implements SmsConnectorInterface
             [
                 'base_uri' => config('drivers.sms.zenvia.api'),
                 'headers' => [
-                    'X-API-TOKEN' => config('drivers.sms.zenvia.token')
-                ]
-            ]
+                    'X-API-TOKEN' => config('drivers.sms.zenvia.token'),
+                ],
+            ],
         ]);
 
         try {
@@ -69,14 +66,15 @@ class ZenviaConnector implements SmsConnectorInterface
                     'contents' => [
                         [
                             'type' => 'text',
-                            'text' => $this->text
-                        ]
-                    ]
-                ]
+                            'text' => $this->text,
+                        ],
+                    ],
+                ],
             ]);
-        } catch (\Exception|ClientException $e) {
+        } catch (ClientException|Exception $e) {
             make(StdoutLoggerInterface::class)
-                ->alert("Message: " . $e->getMessage() .
+                ->alert(
+                    'Message: ' . $e->getMessage() .
                     "\n File: " . $e->getFile() .
                     "\n Line: " . $e->getLine() .
                     " \n TraceAsString: " . $e->getTraceAsString()
