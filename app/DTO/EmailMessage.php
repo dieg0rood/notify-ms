@@ -6,9 +6,9 @@ use App\Interfaces\Message\EmailMessageInterface;
 
 class EmailMessage implements EmailMessageInterface
 {
-    private string $to;
-    private ?string $cc;
-    private ?string $bcc;
+    private array $to;
+    private array $cc;
+    private array $bcc;
     private string $body;
     private string $subject;
     private array $attachments = [];
@@ -16,17 +16,17 @@ class EmailMessage implements EmailMessageInterface
     public function __construct(array $data)
     {
         $this->to = $data['email']['to'];
-        $this->cc = $data['email']['cc'] ?? null;
-        $this->bcc = $data['email']['bcc'] ?? null;
+        $this->cc = $data['email']['cc'] ?? [];
+        $this->bcc = $data['email']['bcc'] ?? [];
         $this->body = $data['email']['body'];
         $this->subject = $data['email']['subject'];
         $this->attachments = $data['email']['attachments'] ?? [];
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getTo(): string
+    public function getTo(): array
     {
         return $this->to;
     }
@@ -56,17 +56,17 @@ class EmailMessage implements EmailMessageInterface
     }
 
     /**
-     * @return string|null
+     * @return array
      */
-    public function getBcc(): ?string
+    public function getBcc(): array
     {
         return $this->bcc;
     }
 
     /**
-     * @return string|null
+     * @return array
      */
-    public function getCc(): ?string
+    public function getCc(): array
     {
         return $this->cc;
     }

@@ -13,9 +13,4 @@ interface SmsMessageInterface
      * @return string
      */
     public function getBody(): string;
-
-    /**
-     * @return string
-     */
-    public function getSubject(): string;
 }

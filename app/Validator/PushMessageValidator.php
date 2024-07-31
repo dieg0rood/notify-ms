@@ -8,10 +8,21 @@ class PushMessageValidator extends AbstractValidator implements ValidatorInterfa
 {
     public function getRules(): array
     {
-        return [];
+        return [
+            'mobile.subject' => ['string', 'required'],
+            'mobile.push.body' => ['string', 'required'],
+            'mobile.push.payload' => ['array']
+        ];
     }
+
     public function getMessages(): array
     {
-        return [];
+        return [
+            'mobile.push.body.required' => 'The :attribute field is required.',
+            'mobile.push.body.string' => 'The :attribute must be a string.',
+            'mobile.push.payload.array' => 'The :attribute must be an array.',
+            'mobile.subject.required' => 'The :attribute field is required.',
+            'mobile.subject.string' => 'The :attribute must be a string.',
+        ];
     }
 }

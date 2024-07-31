@@ -5,9 +5,9 @@ namespace App\Interfaces\Message;
 interface EmailMessageInterface
 {
     /**
-     * @return string
+     * @return array
      */
-    public function getTo(): string;
+    public function getTo(): array;
 
     /**
      * @return array
@@ -25,12 +25,12 @@ interface EmailMessageInterface
     public function getBody(): string;
 
     /**
-     * @return string|null
+     * @return array|null
      */
-    public function getBcc(): ?string;
+    public function getBcc(): ?array;
 
     /**
-     * @return string|null
+     * @return array|null
      */
-    public function getCc(): ?string;
+    public function getCc(): ?array;
 }
